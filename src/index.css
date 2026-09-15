@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse at 100% 55%,
+      rgba(0, 110, 255, 0.45) 0%,
+      rgba(0, 70, 160, 0.18) 18%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 25% 0%,
+      rgba(0, 70, 150, 0.3) 0%,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #020812 45%,
+      #020a14 70%,
+      #000000 100%
+    );
+
+  background-attachment: fixed;
+  color: white;
+}
+
+/* Keep image sections opaque, let everything else show the body gradient */
+.bg-image-section {
+  background-color: #000; /* fallback until image loads */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Make sure generic containers don't paint over body's gradient */
+#root > * {
+  background: transparent;
+}
