@@ -155,7 +155,7 @@ const CARDS_DATA = [
   { id: 65, name: "SBI RuPay Select", category: "debit card", company: "sbi", image: i65 },
 ];
 
-const AllCards = ({ setRoute, category = "credit card", company = "hdfc", setCard }) => {
+const AllCards = ({ setRoute, category = "credit card", company = "hdfc", setCardName }) => {
   const [activeCard, setActiveCard] = useState(null);
   const itemRefs = useRef([]);
   const scrollRef = useRef(null);
@@ -247,11 +247,12 @@ const AllCards = ({ setRoute, category = "credit card", company = "hdfc", setCar
               key={card.id}
               ref={(el) => (itemRefs.current[index] = el)}
               data-id={card.id}
+// Replace short-circuit syntax with proper function call sequence
               onClick={() => {
-                if (setCard) setCard(card);
-                if (setRoute) setRoute("cardDetail");
-              }}
-              style={{
+                if (setCardName) setCardName(card.name);
+                if (setRoute) setRoute("details");
+              }}             
+               style={{
                 cursor: "pointer",
                 fontSize: "2rem",
                 fontWeight: "900",

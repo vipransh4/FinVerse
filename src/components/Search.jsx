@@ -134,7 +134,7 @@ const ALL_CARDS = [
   { id: 65, name: "SBI RuPay Select", image: i65 },
 ];
 
-const Search = ({ setCard, setRoute }) => {
+const Search = ({ setCardName, setRoute }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filter cards by matching name against input string
@@ -162,6 +162,8 @@ const Search = ({ setCard, setRoute }) => {
             .toLowerCase()
             .includes(searchTerm.toLowerCase());
           return (
+            
+
             <div
               key={card.id}
               onClick={() => {
@@ -169,9 +171,9 @@ const Search = ({ setCard, setRoute }) => {
                 if (setCard) setCard(card);
                 if (setRoute) setRoute("cardDetail");
               }}
-              className={`bg-neutral-800 p-4 rounded-xl flex flex-col items-center justify-between transition duration-300 shadow-md ${
+              className={`bg-neutral-800 p-4 rounded-xl flex flex-col items-center justify-between transition-all duration-300 shadow-md border border-transparent ${
                 isMatch
-                  ? "hover:scale-105 cursor-pointer hover:border-neutral-500"
+                  ? "hover:scale-115 cursor-pointer hover:border-white hover:shadow-lg"
                   : "hidden"
               }`}
             >
@@ -179,13 +181,35 @@ const Search = ({ setCard, setRoute }) => {
                 src={card.image}
                 alt={card.name}
                 className="w-full h-44 object-contain mb-3"
-              />
+onClick={() => {
+                if (setCardName) setCardName(card.name);
+                if (setRoute) setRoute("details");
+              }}               />
               <p className="text-center font-semibold text-sm text-neutral-200">
                 {card.name}
               </p>
             </div>
           );
         })}
+            <button
+            className="
+                fixed top-6 left-6 z-50
+                px-5 py-3
+                text-lg font-medium text-white
+                bg-white/5
+                border border-white/70
+                rounded-md
+                shadow-[0_0_12px_rgba(180,220,255,0.5)]
+                backdrop-blur-sm
+                transition-all duration-300
+                hover:bg-white hover:text-black
+                hover:shadow-[0_0_25px_rgba(180,220,255,0.8)]
+                cursor-pointer
+            "
+            onClick={()=>setRoute('hero')}
+            >
+            ← Back to home
+            </button>
         {filteredCards.length === 0 && (
           <div className="col-span-full text-center text-neutral-400 py-12">
             No cards found matching "{searchTerm}"
