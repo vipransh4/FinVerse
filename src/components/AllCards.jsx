@@ -3,9 +3,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import i1 from '../assets/credit card/Amex/Amex Centurion (Black Card).png';
 import i2 from '../assets/credit card/Amex/Amex Gold.png';
 import i3 from '../assets/credit card/Amex/Amex Platinum Travel.jpg';
-
 import i4 from '../assets/credit card/Amex/Amex Platinum.jpg';
-
 import i5 from '../assets/credit card/Amex/Amex Reserve.jpg';
 import i6 from '../assets/credit card/axis/Airtel Axis Bank.jpg';
 import i7 from '../assets/credit card/axis/Axis Ace Signature.png';

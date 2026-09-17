@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import Benefits from './Benefits'
 // Asset Imports
 import i1 from "../assets/credit card/Amex/Amex Centurion (Black Card).png";
 import i2 from "../assets/credit card/Amex/Amex Gold.png";
@@ -71,7 +71,6 @@ import i65 from "../assets/debit card/sbi/SBI RuPay Select.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Map imported images to card names
 const CARD_DATA = {
   "Amex Centurion (Black Card)": i1,
   "Amex Gold": i2,
@@ -138,7 +137,7 @@ const CARD_DATA = {
   "SBI Mumbai Metro Combo": i63,
   "SBI Platinum International": i64,
   "SBI RuPay Select": i65,
-  DEFAULT: i17, // Fallback default card
+  DEFAULT: i15,
 };
 
 const Details = ({ cardName = "HDFC Regalia Gold", setRoute }) => {
@@ -146,136 +145,128 @@ const Details = ({ cardName = "HDFC Regalia Gold", setRoute }) => {
   const cardRef = useRef(null);
   const glowRef = useRef(null);
 
-  // Retrieve matching image or fallback gracefully
   const cardImage = CARD_DATA[cardName] || CARD_DATA["DEFAULT"];
 
   useLayoutEffect(() => {
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: triggerRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.2, // Keeps your existing smooth scroll physics
-      },
-    });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1.2,
+        },
+      });
 
-    // Rotation 1 (0° -> 360°)
-    tl.to(
-      cardRef.current,
-      {
-        rotationY: 180,
-        rotationX: 12,
-        rotationZ: -4,
-        scale: 1.1,
-        z: 80,
-        duration: 0.16,
-        ease: "power1.inOut",
-      },
-      0
-    )
-      .to(
-        glowRef.current,
-        { opacity: 0.6, scale: 1.3, duration: 0.16, ease: "power1.inOut" },
+      tl.to(
+        cardRef.current,
+        {
+          rotationY: 180,
+          rotationX: 12,
+          rotationZ: -4,
+          scale: 1.1,
+          z: 80,
+          duration: 0.16,
+          ease: "power1.inOut",
+        },
         0
       )
-      .to(
-        cardRef.current,
-        {
-          rotationY: 360,
-          rotationX: 0,
-          rotationZ: 0,
-          scale: 1,
-          z: 0,
-          duration: 0.16,
-          ease: "power1.inOut",
-        },
-        0.16
-      )
+        .to(
+          glowRef.current,
+          { opacity: 0.6, scale: 1.3, duration: 0.16, ease: "power1.inOut" },
+          0
+        )
+        .to(
+          cardRef.current,
+          {
+            rotationY: 360,
+            rotationX: 0,
+            rotationZ: 0,
+            scale: 1,
+            z: 0,
+            duration: 0.16,
+            ease: "power1.inOut",
+          },
+          0.16
+        )
+        .to(
+          cardRef.current,
+          {
+            rotationY: 540,
+            rotationX: -15,
+            rotationZ: 5,
+            scale: 1.15,
+            z: 100,
+            duration: 0.17,
+            ease: "power1.inOut",
+          },
+          0.33
+        )
+        .to(
+          glowRef.current,
+          { opacity: 0.85, scale: 1.5, duration: 0.17, ease: "power1.inOut" },
+          0.33
+        )
+        .to(
+          cardRef.current,
+          {
+            rotationY: 720,
+            rotationX: 0,
+            rotationZ: 0,
+            scale: 1,
+            z: 0,
+            duration: 0.17,
+            ease: "power1.inOut",
+          },
+          0.5
+        )
+        .to(
+          cardRef.current,
+          {
+            rotationY: 900,
+            rotationX: 10,
+            rotationZ: -4,
+            scale: 1.08,
+            z: 60,
+            duration: 0.17,
+            ease: "power1.inOut",
+          },
+          0.67
+        )
+        .to(
+          glowRef.current,
+          { opacity: 0.6, scale: 1.25, duration: 0.17, ease: "power1.inOut" },
+          0.67
+        )
+        .to(
+          cardRef.current,
+          {
+            rotationY: 1080,
+            rotationX: 0,
+            rotationZ: 0,
+            scale: 1,
+            z: 0,
+            duration: 0.16,
+            ease: "power1.inOut",
+          },
+          0.84
+        )
+        .to(
+          glowRef.current,
+          { opacity: 0.35, scale: 1, duration: 0.16, ease: "power1.inOut" },
+          0.84
+        );
+    }, triggerRef);
 
-      // Rotation 2 (360° -> 720°)
-      .to(
-        cardRef.current,
-        {
-          rotationY: 540,
-          rotationX: -15,
-          rotationZ: 5,
-          scale: 1.15,
-          z: 100,
-          duration: 0.17,
-          ease: "power1.inOut",
-        },
-        0.33
-      )
-      .to(
-        glowRef.current,
-        { opacity: 0.85, scale: 1.5, duration: 0.17, ease: "power1.inOut" },
-        0.33
-      )
-      .to(
-        cardRef.current,
-        {
-          rotationY: 720,
-          rotationX: 0,
-          rotationZ: 0,
-          scale: 1,
-          z: 0,
-          duration: 0.17,
-          ease: "power1.inOut",
-        },
-        0.5
-      )
-
-      // Rotation 3 (720° -> 1080°)
-      .to(
-        cardRef.current,
-        {
-          rotationY: 900,
-          rotationX: 10,
-          rotationZ: -4,
-          scale: 1.08,
-          z: 60,
-          duration: 0.17,
-          ease: "power1.inOut",
-        },
-        0.67
-      )
-      .to(
-        glowRef.current,
-        { opacity: 0.6, scale: 1.25, duration: 0.17, ease: "power1.inOut" },
-        0.67
-      )
-      .to(
-        cardRef.current,
-        {
-          rotationY: 1080, // Final angle completing 3 full revolutions
-          rotationX: 0,
-          rotationZ: 0,
-          scale: 1,
-          z: 0,
-          duration: 0.16,
-          ease: "power1.inOut",
-        },
-        0.84
-      )
-      .to(
-        glowRef.current,
-        { opacity: 0.35, scale: 1, duration: 0.16, ease: "power1.inOut" },
-        0.84
-      );
-  }, triggerRef);
-
-  return () => ctx.revert();
-}, [cardName]);
+    return () => ctx.revert();
+  }, [cardName]);
 
   return (
     <div
       ref={triggerRef}
       className="relative w-full h-[250vh] bg-black text-white overflow-x-clip"
     >
-      {/* Sticky Fullscreen Presentation Area */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden [perspective:1200px] md:[perspective:1600px]">
-        {/* Back Button */}
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden perspective-distant md:perspective-[1600px]">
         {setRoute && (
           <button
             onClick={() => setRoute("allcards")}
@@ -285,38 +276,50 @@ const Details = ({ cardName = "HDFC Regalia Gold", setRoute }) => {
           </button>
         )}
 
-        {/* Deep Atmospheric Background Grid/Gradients */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900/60 via-black to-black pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-neutral-900/60 via-black to-black pointer-events-none" />
 
-        {/* Dynamic Blue Glow Element */}
         <div
           ref={glowRef}
-          className="absolute w-72 h-44 sm:w-96 sm:h-60 rounded-full bg-gradient-to-tr from-blue-600 via-cyan-500 to-indigo-600 opacity-20 blur-3xl pointer-events-none transition-shadow will-change-transform"
+          className="absolute w-72 h-44 sm:w-96 sm:h-60 rounded-full bg-linear-to-tr from-blue-600 via-cyan-500 to-indigo-600 opacity-20 blur-3xl pointer-events-none transition-shadow will-change-transform"
         />
 
-        {/* 3D Card Wrapper Container */}
-        <div className="relative z-10 flex flex-col items-center justify-center [transform-style:preserve-3d]">
-          <div
-            ref={cardRef}
-            className="w-72 h-44 sm:w-96 sm:h-60 rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] border border-white/10 overflow-hidden bg-neutral-900/40 backdrop-blur-md will-change-transform [transform-style:preserve-3d]"
-          >
-            <img
-              src={cardImage}
-              alt={cardName}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = CARD_DATA["DEFAULT"];
-              }}
-              className="w-full h-full object-contain pointer-events-none rounded-2xl p-2"
-            />
+        {/* Main Layout Container: Side-by-Side Flex Layout */}
+        <div className="relative z-10 w-full max-w-7xl px-4 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+          
+          {/* Left Side Content / Benefits */}
+          <div className="w-full lg:w-1/3 flex flex-col justify-center">
+            <Benefits cardName={cardName} position={"left"} />
           </div>
 
-          {/* Interactive Card Title Badge */}
-          <div className="mt-10 px-6 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl pointer-events-none">
-            <span className="text-sm sm:text-base font-medium tracking-widest uppercase bg-gradient-to-r from-neutral-200 via-white to-neutral-400 bg-clip-text text-transparent">
-              {cardName}
-            </span>
+          {/* Center 3D Card Container */}
+          <div className="flex flex-col items-center justify-center transform-3d shrink-0">
+            <div
+              ref={cardRef}
+              className="w-72 h-44 sm:w-96 sm:h-60 rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] border border-white/10 overflow-hidden bg-neutral-900/40 backdrop-blur-md will-change-transform transform-3d"
+            >
+              <img
+                src={cardImage}
+                alt={cardName}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = CARD_DATA["DEFAULT"];
+                }}
+                className="w-full h-full object-contain pointer-events-none rounded-2xl p-2"
+              />
+            </div>
+
+            <div className="mt-10 px-6 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl pointer-events-none">
+              <span className="text-sm sm:text-base font-medium tracking-widest uppercase bg-linear-to-r from-neutral-200 via-white to-neutral-400 bg-clip-text text-transparent">
+                {cardName}
+              </span>
+            </div>
           </div>
+
+          {/* Right Side Content / Secondary Benefits or Info */}
+          <div className="w-full lg:w-1/3 flex flex-col justify-center">
+            <Benefits cardName={cardName} position={"right"} />
+          </div>
+
         </div>
       </div>
     </div>
