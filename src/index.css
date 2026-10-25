@@ -41,6 +41,56 @@ body {
   background-position: center;
 }
 
+@theme {
+  --animate-progress: progress 8s linear forwards;
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@keyframes image-up {
+  from {
+    opacity: 0;
+    transform: translateY(-45px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes image-down {
+  from {
+    opacity: 0;
+    transform: translateY(45px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@theme {
+  --animate-image-up: image-up 500ms ease-out both;
+  --animate-image-down: image-down 500ms ease-out both;
+}
+
+
+@custom-variant hover (&:hover);
+
 /* Make sure generic containers don't paint over body's gradient */
 #root > * {
   background: transparent;

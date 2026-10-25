@@ -3,12 +3,11 @@ import i1 from '../assets/credit.png';
 import i2 from '../assets/general.png';
 import i3 from '../assets/debit.png';
 
-const Cards = ({ setRoute, setCategory }) => {
+const Category = ({ setRoute, setCategory }) => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-8">
       <div className="my-10 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl">
         
-        {/* Card 1: Debit */}
         <div 
           className="relative h-125 w-full rounded-2xl overflow-hidden group shadow-lg hover:shadow-[0_10px_40px_-10px_rgba(255,255,255,0.15)] transition-all duration-500 hover:-translate-y-2 cursor-pointer"
           onClick={() => {
@@ -54,7 +53,7 @@ const Cards = ({ setRoute, setCategory }) => {
             </div>
             <div>
               <h2 className="text-white text-3xl font-extrabold tracking-widest mb-2 drop-shadow-md">
-                EXPLORE<br />GENERAL CARDS
+                FIND<br />YOUR CARD
               </h2>
               <p className="text-gray-400 text-sm font-medium tracking-[0.3em]">**** **** **** 8472</p>
             </div>
@@ -94,4 +93,4 @@ const Cards = ({ setRoute, setCategory }) => {
   );
 };
 
-export default Cards;
+export default Category;

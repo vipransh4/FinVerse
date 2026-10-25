@@ -44,7 +44,7 @@ const Hero = ({setRoute}) => {
                         "
                         onClick={()=>setRoute('search')}
                         >
-                        Explore Cards →
+                        Find your card →
                     </button>
 
                 </div>

@@ -1,47 +1,125 @@
-import { useState } from 'react'
-import Hero from './components/Hero'
-import Cards from './components/Cards'
-import Company from './components/Company'
-import AllCards from './components/AllCards'
-import Search from './components/Search'
-import Details from './components/Details' 
-import './App.css'
+import { useState } from 'react';
+import {
+  HashRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useParams
+} from 'react-router-dom';
 
-function App() {
-  const [route, setRoute] = useState('hero');
+import Hero from './components/Hero';
+import Category from './components/Category';
+import Company from './components/Company';
+import CompanyCards from './components/CompanyCards';
+import Search from './components/Search';
+import SelectedCard from './components/SelectedCard/SelectedCard';
+
+import './App.css';
+
+function AppContent() {
+  const navigate = useNavigate();
+
   const [category, setCategory] = useState(null);
   const [company, setCompany] = useState(null);
-  const [cardName, setCardName] = useState(null);
+
+  // Navigation helper for your existing components
+  const setRoute = (route) => {
+    const paths = {
+      hero: '/',
+      company: '/company',
+      allcards: '/cards',
+      search: '/search'
+    };
+
+    if (route === 'details') {
+      return;
+    }
+
+    navigate(paths[route] || '/');
+  };
+
+  const setSelectedCardName = (name) => {
+    navigate(`/card/${encodeURIComponent(name)}`);
+  };
 
   return (
-    <>
-      {route === 'hero' ? (
-        <>
-          <Hero setRoute={setRoute} />
-          <Cards setRoute={setRoute} setCategory={setCategory} />
-        </>
-      ) : route === 'company' ? (
-        <Company 
-          setRoute={setRoute} 
-          category={category} 
-          setCategory={setCategory} 
-          setCompany={setCompany} 
-        />
-      ) : route === 'allcards' ? (
-        <AllCards 
-          setRoute={setRoute} 
-          category={category} 
-          company={company}
-          setCardName={setCardName} 
-        />
-      ) : route === 'search' ? (
-        <Search 
-          setRoute={setRoute} setCardName={setCardName}  
-        />
-      ) : route === 'details' ? (
-        <Details cardName={cardName} setRoute={setRoute}/>
-      ) : null}
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <Hero setRoute={setRoute} />
+            <Category
+              setRoute={setRoute}
+              setCategory={setCategory}
+            />
+          </>
+        }
+      />
+
+      <Route
+        path="/company"
+        element={
+          <Company
+            setRoute={setRoute}
+            category={category}
+            setCategory={setCategory}
+            setCompany={setCompany}
+          />
+        }
+      />
+
+      <Route
+        path="/cards"
+        element={
+          <CompanyCards
+            setRoute={setRoute}
+            category={category}
+            company={company}
+            setCardName={setSelectedCardName}
+          />
+        }
+      />
+
+      <Route
+        path="/search"
+        element={
+          <Search
+            setRoute={setRoute}
+            setCardName={setSelectedCardName}
+          />
+        }
+      />
+
+      <Route
+        path="/card/:cardName"
+        element={<CardDetails setRoute={setRoute} />}
+      />
+
+      <Route
+        path="*"
+        element={<h2>404 - Page Not Found</h2>}
+      />
+    </Routes>
+  );
+}
+
+function CardDetails({ setRoute }) {
+  const { cardName } = useParams();
+
+  return (
+    <SelectedCard
+      cardName={decodeURIComponent(cardName)}
+      setRoute={setRoute}
+    />
+  );
+}
+
+function App() {
+  return (
+    <HashRouter>
+      <AppContent />
+    </HashRouter>
   );
 }
 

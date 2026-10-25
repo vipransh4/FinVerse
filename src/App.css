@@ -1,0 +1,23 @@
+/* Black scrollbar for Benefits & Categories */
+.black-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #262626;
+}
+
+.black-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.black-scrollbar::-webkit-scrollbar-track {
+  background: #262626;
+  border-radius: 10px;
+}
+
+.black-scrollbar::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+.black-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #111111;
+}
