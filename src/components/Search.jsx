@@ -6,6 +6,7 @@ const Search = ({ setCardName, setRoute }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedCompany, setSelectedCompany] = useState("all");
   const [selectedTags, setSelectedTags] = useState([]);
+  const [compareSlots, setCompareSlots] = useState([null, null]);
 
   const companies = [
     ...new Set(CardInfo.map((card) => card.company).filter(Boolean)),
@@ -32,12 +33,7 @@ const Search = ({ setCardName, setRoute }) => {
       selectedTags.length === 0 ||
       selectedTags.every((tag) => (card.tags || []).includes(tag));
 
-    return (
-      matchesName &&
-      matchesCategory &&
-      matchesCompany &&
-      matchesTags
-    );
+    return matchesName && matchesCategory && matchesCompany && matchesTags;
   });
 
   const resetFilters = () => {
@@ -46,6 +42,28 @@ const Search = ({ setCardName, setRoute }) => {
     setSelectedCompany("all");
     setSelectedTags([]);
   };
+
+  const handleDrop = (e, slotIndex) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData("text/plain");
+    const card = CardInfo.find((c) => String(c.id) === id);
+    if (!card) return;
+    setCompareSlots((prev) => {
+      const next = [...prev];
+      next[slotIndex] = card;
+      return next;
+    });
+  };
+
+  const clearSlot = (slotIndex) =>
+    setCompareSlots((prev) => prev.map((c, i) => (i === slotIndex ? null : c)));
+
+  const goCompare = () => {
+      const cardNames = compareSlots.map((card) => card.name);
+
+      sessionStorage.setItem("compareCards", JSON.stringify(cardNames));
+      setRoute("compare");
+    };
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white p-5 md:p-7">
@@ -60,7 +78,7 @@ const Search = ({ setCardName, setRoute }) => {
       </button>
 
       {/* Search Bar */}
-      <div className="w-full max-w-2xl mx-auto mt-10 mb-10">
+      <div className="w-full max-w-2xl mx-auto mt-0 mb-6">
         <input
           type="text"
           placeholder="Search card by name..."
@@ -72,17 +90,13 @@ const Search = ({ setCardName, setRoute }) => {
         />
       </div>
 
-      {/* Sidebar + Cards */}
-      <div className="w-full max-w-[1380px] mx-auto flex flex-col md:flex-row gap-10 px-4">
-
+      {/* Sidebar + Cards + Compare panel */}
+      <div className="w-full flex flex-col md:flex-row gap-6 px-2 mt-16">
         {/* Filter Sidebar */}
-          <aside
-            className="w-full md:w-64 lg:w-72 xl:w-80 shrink-0
-            self-start md:sticky md:top-25
-            bg-neutral-900 border border-neutral-800
-            rounded-2xl p-5"
+         <aside
+            className="w-full md:w-72 shrink-0 self-start md:sticky md:top-24
+            bg-neutral-900 border border-neutral-800 rounded-2xl p-4"
           >
-
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Filter Cards</h2>
             <button
@@ -95,9 +109,7 @@ const Search = ({ setCardName, setRoute }) => {
 
           {/* Card Type */}
           <div className="mb-7">
-            <h3 className="font-semibold mb-3 text-neutral-200">
-              Card Type
-            </h3>
+            <h3 className="font-semibold mb-3 text-neutral-200">Card Type</h3>
 
             {[
               { label: "All Cards", value: "all" },
@@ -125,9 +137,7 @@ const Search = ({ setCardName, setRoute }) => {
 
           {/* Company */}
           <div className="mb-7">
-            <h3 className="font-semibold mb-3 text-neutral-200">
-              Company
-            </h3>
+            <h3 className="font-semibold mb-3 text-neutral-200">Company</h3>
 
             <select
               value={selectedCompany}
@@ -149,7 +159,7 @@ const Search = ({ setCardName, setRoute }) => {
 
           {/* Benefits / Tags */}
           <div>
-            <h3 className="max-h-30 overflow-y-auto mb-3 pr-2 mt-3 black-scrollbar">
+            <h3 className="mb-3 pr-2 mt-3 font-semibold text-neutral-200">
               Benefits & Categories
             </h3>
 
@@ -178,9 +188,7 @@ const Search = ({ setCardName, setRoute }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-neutral-500">
-                No tags available.
-              </p>
+              <p className="text-sm text-neutral-500">No tags available.</p>
             )}
           </div>
         </aside>
@@ -188,19 +196,21 @@ const Search = ({ setCardName, setRoute }) => {
         {/* Card Grid */}
         <main className="flex-1 min-w-0">
           <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
-            <h2 className="text-xl font-semibold">
-              Explore Cards
-            </h2>
+            <h2 className="text-xl font-semibold">Explore Cards</h2>
             <p className="text-sm text-neutral-400">
               {filteredCards.length} cards found
             </p>
           </div>
 
           {filteredCards.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredCards.map((card) => (
                 <div
                   key={card.id}
+                  draggable
+                  onDragStart={(e) =>
+                    e.dataTransfer.setData("text/plain", String(card.id))
+                  }
                   onClick={() => {
                     if (setCardName) setCardName(card.name);
                     if (setRoute) setRoute("details");
@@ -213,23 +223,23 @@ const Search = ({ setCardName, setRoute }) => {
                   <img
                     src={card.image}
                     alt={card.name}
+                    draggable={false}
                     className="w-full h-44 object-contain mb-5"
                   />
 
-                  <p className="text-center font-semibold text-sm
-                  text-neutral-100">
+                  <p className="text-center font-semibold text-sm text-neutral-100">
                     {card.name}
                   </p>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center text-neutral-400 py-20
-            bg-neutral-900 rounded-2xl border border-neutral-800">
+            <div
+              className="text-center text-neutral-400 py-20
+            bg-neutral-900 rounded-2xl border border-neutral-800"
+            >
               <p className="text-lg mb-2">No cards found</p>
-              <p className="text-sm">
-                Try changing your search or filters.
-              </p>
+              <p className="text-sm">Try changing your search or filters.</p>
               <button
                 onClick={resetFilters}
                 className="mt-5 px-5 py-2 rounded-lg bg-white
@@ -240,6 +250,57 @@ const Search = ({ setCardName, setRoute }) => {
             </div>
           )}
         </main>
+
+        {/* Compare Panel */}
+        <section
+          className="w-full md:w-64 shrink-0 self-start md:sticky md:top-24
+          flex flex-col gap-4"
+        >
+          {[0, 1].map((i) => (
+            <div
+              key={i}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => handleDrop(e, i)}
+              className="relative h-52 rounded-2xl border-2 border-dashed
+              border-neutral-600 bg-neutral-900 flex items-center
+              justify-center p-3"
+            >
+              {compareSlots[i] ? (
+                <>
+                  <img
+                    src={compareSlots[i].image}
+                    alt={compareSlots[i].name}
+                    className="w-full h-full object-contain"
+                  />
+                  <button
+                    onClick={() => clearSlot(i)}
+                    className="absolute top-2 right-2 w-7 h-7 rounded-full
+                    bg-neutral-800 hover:bg-white hover:text-black text-sm"
+                  >
+                    ✕
+                  </button>
+                </>
+              ) : (
+                <p className="text-center text-sm text-neutral-400">
+                  Drag any card from the page for comparison
+                </p>
+              )}
+            </div>
+          ))}
+
+          {compareSlots[0] && compareSlots[1] && (
+            <button
+              onClick={goCompare}
+              className="px-5 py-3 rounded-lg
+              font-medium transition-all duration-300
+            hover:bg-white hover:text-black
+              hover:shadow-[0_0_25px_rgba(180,220,255,0.8)] shadow-[0_0_12px_rgba(180,220,255,0.5)]
+              backdrop-blur-sm"
+            >
+              Compare
+            </button>
+          )}
+        </section>
       </div>
     </div>
   );

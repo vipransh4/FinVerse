@@ -314,7 +314,7 @@ const CardInfo =
   
     // Credit Cards - Axis
     { id: 6, name: "Airtel Axis Bank", category: "credit card", company: "axis", image: i6, 
-      tags:['utility bills'],
+      tags:['Utility Bills'],
       desc1:["The Airtel Axis Credit Card is a co-branded card offered by Axis Bank in partnership with the telecom services provider company Bharti Airtel. Targeted at individuals who mostly use Airtel Mobile, Broadband, WiFi, and DTH, it comes at an affordable annual fee of ₹500 + GST (~₹590). As a joining benefit, cardholders shall receive an Amazon voucher worth ₹250 on realization of charges, offsetting the amount paid.","The Airtel Axis Credit Card used to be one of the best cards for utility bill payments and Airtel recharges. But after the April 2026 devaluation, it has lost a lot of its value. The cashback rates are still the same, but now the actual cashback depends on how much you spend in the 1% category. So even if you are eligible for 25% cashback, you won’t get the full benefit unless you spend enough in other categories first.","This makes the card much less useful, especially for people who only use it for bills and recharges. On top of that, benefits like airport lounge access have also been removed, making the card less attractive overall."],
       charges:[{
         "Joining Fee":"₹500 + GST",
@@ -349,7 +349,7 @@ const CardInfo =
       link:"https://web.axis.bank.in/DigitalChannel/WebForm/?ipa185&axisreferralcode=CRD01"
     },
     { id: 7, name: "Axis Ace Signature", category: "credit card", company: "axis", image: i7, 
-      tags:["travel","utility-bills"],
+      tags:["Travel","Utility Bills"],
       desc1:["The Axis Bank ACE credit card launched in partnership with Google Pay and Visa aims to capitalize on the internet penetration and heavy growth of online payments in the country. With this card, you get 5% cashback on electricity, gas, water, and internet bill payments through the Google Pay application and 4% cashback on popular merchants like Swiggy, Zomato, and Ola. Axis Bank is targeting young professionals with this credit card who mainly use these popular merchants and are new to the credit scene.","In addition to the cashback offers, the ACE credit card offers complimentary domestic airport lounge access and other benefits. Check out our Axis Bank ACE credit card review to know more about this card."],
       charges:[{
         "Joining Fee":"₹499 + GST",

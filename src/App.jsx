@@ -13,6 +13,7 @@ import Company from './components/Company';
 import CompanyCards from './components/CompanyCards';
 import Search from './components/Search';
 import SelectedCard from './components/SelectedCard/SelectedCard';
+import Compare from './components/Compare';
 
 import './App.css';
 
@@ -28,7 +29,8 @@ function AppContent() {
       hero: '/',
       company: '/company',
       allcards: '/cards',
-      search: '/search'
+      search: '/search',
+      compare:'/compare'
     };
 
     if (route === 'details') {
@@ -87,6 +89,14 @@ function AppContent() {
           <Search
             setRoute={setRoute}
             setCardName={setSelectedCardName}
+          />
+        }
+      />
+      <Route
+        path="/compare"
+        element={
+          <Compare
+            setRoute={setRoute}
           />
         }
       />

@@ -161,16 +161,29 @@ const Company = ({ setRoute, category, setCategory, setCompany }) => {
             if (setCategory) setCategory(null);
             setRoute("hero");
           }}
-          className="absolute top-6 left-6 z-40 bg-[#f4ebd8] text-[#0f0d0c] px-4 py-2 rounded-md font-bold text-sm hover:opacity-80 transition cursor-pointer"
+          className="
+                fixed top-6 left-6 z-50
+                px-5 py-3
+                text-lg font-medium text-white
+                bg-white/5
+                border border-white/70
+                rounded-md
+                shadow-[0_0_12px_rgba(180,220,255,0.5)]
+                backdrop-blur-sm
+                transition-all duration-300
+                hover:bg-white hover:text-black
+                hover:shadow-[0_0_25px_rgba(180,220,255,0.8)]
+                cursor-pointer
+              "
         >
           ← Back to Selection
         </button>
 
-        <h1 className="absolute top-8 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap 
+        <h1 className="absolute top-18 left-1/2 z-40 -translate-x-1/2 whitespace-nowrap 
         bg-gradient-to-b from-white via-[#f4ebd8] to-[#c9a45c] bg-clip-text text-center text-2xl font-extrabold uppercase 
-        tracking-[0.2em] text-transparent drop-shadow-[0_0_25px_rgba(244,200,120,0.35)] md:top-10 md:text-5xl">
-  Explore Banking Partners
-</h1>
+        tracking-[0.2em] text-transparent drop-shadow-[0_0_25px_rgba(244,200,120,0.35)] md:top-20 md:text-5xl">
+          Explore Banking Partners
+        </h1>
 
         <svg
           viewBox="0 0 1000 600"

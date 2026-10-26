@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from "react";
 import CardInfo from "../CardInfo";
 
@@ -50,7 +49,7 @@ const Charges = ({ cardName }) => {
   useEffect(() => {
     if (slides.length <= 1) return;
 
-    const interval = setInterval(nextSlide, 8000);
+    const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [nextSlide, slides.length]);
 

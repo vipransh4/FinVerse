@@ -42,7 +42,7 @@ body {
 }
 
 @theme {
-  --animate-progress: progress 8s linear forwards;
+  --animate-progress: progress 5s linear forwards;
 
   @keyframes progress {
     from {
