@@ -224,6 +224,7 @@ const Search = ({ setCardName, setRoute }) => {
                     src={card.image}
                     alt={card.name}
                     draggable={false}
+                    loading="lazy"
                     className="w-full h-44 object-contain mb-5"
                   />
 
@@ -270,6 +271,7 @@ const Search = ({ setCardName, setRoute }) => {
                   <img
                     src={compareSlots[i].image}
                     alt={compareSlots[i].name}
+                    loading="lazy"
                     className="w-full h-full object-contain"
                   />
                   <button

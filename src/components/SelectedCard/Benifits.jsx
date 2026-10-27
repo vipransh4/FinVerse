@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CardInfo from "../CardInfo";
-import everyday from "../../assets/everyday.jpg"
-import rewards from "../../assets/rewards and savings.jpg"
-import travel from "../../assets/travel.jpg"
+import everyday from "../../assets/everyday.webp"
+import rewards from "../../assets/rewards and savings.webp"
+import travel from "../../assets/travel.webp"
 import welcome from "../../assets/welcome benefits.webp"
 
 
@@ -45,6 +45,7 @@ const ProcessSection = ({ cardName }) => {
             <img
               key={`${cardName}-${activeIndex}`}
                 src={images[activeIndex % images.length]}
+                loading="lazy"
               alt={benefits[activeIndex]?.title ?? "Card benefit"}
               className={`h-full w-full border border-white/10 object-cover shadow-[0_20px_50px_-10px_rgba(0,0,0,0.8)] ${
                 movingUp
@@ -81,6 +82,7 @@ const ProcessSection = ({ cardName }) => {
                   <img
                     src={images[index % images.length]}
                     alt={benefit.title}
+                    loading="lazy"
                     className="mt-5 aspect-[4/3] w-full object-cover md:hidden"
                   />
                 )}

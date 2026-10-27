@@ -194,6 +194,7 @@ const Compare = ({ setRoute }) => {
                     <img
                       src={card.image}
                       alt={card.name}
+                      loading="lazy"
                       className="w-full h-28 md:h-36 object-contain drop-shadow-lg"
                     />
                   </Tilt>

@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../assets/Hero.png";
+import image from "../assets/Hero.webp";
 
 const Hero = ({setRoute}) => {
     return (
@@ -8,6 +8,7 @@ const Hero = ({setRoute}) => {
             <img
                 src={image}
                 alt="FinVerse financial cards"
+                loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
             />
 

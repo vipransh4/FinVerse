@@ -1,7 +1,7 @@
 import React from "react";
-import i1 from '../assets/credit.png';
-import i2 from '../assets/general.png';
-import i3 from '../assets/debit.png';
+import i1 from '../assets/credit.webp';
+import i2 from '../assets/general.webp';
+import i3 from '../assets/debit.webp';
 
 const Category = ({ setRoute, setCategory }) => {
   return (

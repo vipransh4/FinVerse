@@ -79,6 +79,7 @@ const CompanyCards = ({ setRoute, category = "credit card", company = "hdfc", se
           <img
             src={activeCard.image}
             alt={activeCard.name}
+            loading="lazy"
             style={{ maxWidth: "80%", maxHeight: "80%", objectFit: "contain", borderRadius: "12px", transition: "all 0.3s ease" }}
           />
         ) : (

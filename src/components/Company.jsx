@@ -2,13 +2,13 @@ import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import bg from "../assets/bg.png";
-import amex from "../assets/amex logo.jpg";
-import hdfc from "../assets/hdfc logo.png";
-import hsbc from "../assets/hsbc logo.png";
+import bg from "../assets/bg.webp";
+import amex from "../assets/amex logo.webp";
+import hdfc from "../assets/hdfc logo.webp";
+import hsbc from "../assets/hsbc logo.webp";
 import sbi from "../assets/sbi logo.svg";
-import axis from "../assets/axis logo.png";
-import icici from "../assets/icici logo.png";
+import axis from "../assets/axis logo.webp";
+import icici from "../assets/icici logo.webp";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -211,6 +211,7 @@ const Company = ({ setRoute, category, setCategory, setCompany }) => {
                 <img
                   src={card.image}
                   alt={`${card.title} logo`}
+                  loading="lazy"
                   className="w-44 h-28 object-contain mb-2"
                 />
               </div>

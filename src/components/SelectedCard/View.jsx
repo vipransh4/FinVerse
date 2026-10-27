@@ -104,6 +104,7 @@ const View = ({ cardName = "HDFC Regalia Gold", setRoute }) => {
               <img
                 src={cardImage}
                 alt={cardName}
+                loading="lazy"
                 className="w-full h-full object-contain pointer-events-none rounded-2xl p-2"
                 />
             </div>

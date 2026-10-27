@@ -60,6 +60,7 @@ const SelectedCard = ({ cardName, setRoute }) => {
         autoPlay
         muted
         playsInline
+        preload="metadata"
         className="fixed inset-0 w-full h-full object-cover -z-10 pointer-events-none"
       />
       <View cardName={cardName} setRoute={setRoute} />
